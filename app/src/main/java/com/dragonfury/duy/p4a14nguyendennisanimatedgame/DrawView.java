@@ -13,7 +13,7 @@ import android.graphics.Bitmap;
  */
 public class DrawView extends SurfaceView {
 
-    private Bitmap heroBmp; // Declare space fir Bitmap called heroBmp, global scope
+    private Bitmap heroBmp; // Declare space for Bitmap called heroBmp, global scope
     private SurfaceHolder holder; //Declares space for a SurfaceHolder called holder
     private LoopThread loopThread; //Declares space for a LoopThread called loopThread
     private int x = 0;
