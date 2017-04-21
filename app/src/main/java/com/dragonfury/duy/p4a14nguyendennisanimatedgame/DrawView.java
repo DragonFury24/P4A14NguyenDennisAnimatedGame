@@ -60,6 +60,6 @@ public class DrawView extends SurfaceView {
         if (x < getWidth() - heroBmp.getWidth()) {
             x++;
         }
-        canvas.drawBitmap(heroBmp, 10 * 1440 / getWidth(), 10 * 2560 / getHeight(), null); // Draw heroBmp at (10, 10)
+        canvas.drawBitmap(heroBmp, x, 10 * 2560 / getHeight(), null); // Draw heroBmp at (10, 10)
     }
 }
