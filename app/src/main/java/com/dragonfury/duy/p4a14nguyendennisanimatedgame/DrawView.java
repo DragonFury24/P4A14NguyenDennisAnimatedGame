@@ -23,13 +23,13 @@ public class DrawView extends SurfaceView {
 
         heroBmp = BitmapFactory.decodeResource(getResources(), R.drawable.bluejeans); //Instantiate heroBmp - assign to heroBmp for the first time
         holder = getHolder();
-        loopThread = new LoopThread(this);
+        loopThread = new LoopThread(this); //Instantiate LoopThread with the current instanc eof DrawView
 
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
-                loopThread.setRunning(true);
-                loopThread.start();
+                loopThread.setRunning(true); //Sets the thread's running variable to true
+                loopThread.start(); //Starts the thread
             }
 
             @Override
@@ -39,11 +39,11 @@ public class DrawView extends SurfaceView {
 
             @Override
             public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-                boolean retry = true;
-                loopThread.setRunning(false);
+                boolean retry = true; //Declares boolean called retry and instantiates to true, local variable
+                loopThread.setRunning(false); //Sets the thread's running variable to false
                 while (retry) {
                     try {
-                        loopThread.join();
+                        loopThread.join(); //Blocks the current thread until this instance's thread terminates
                     } catch (InterruptedException e) {
 
                     }
@@ -56,8 +56,8 @@ public class DrawView extends SurfaceView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawColor(Color.BLACK);
-        if (x < getWidth() - heroBmp.getWidth()) {
+        canvas.drawColor(Color.BLACK); //Draws black over the canvas
+        if (x < getWidth() - heroBmp.getWidth()) { //If x left of edge of screen minus width of bmp, increase 1
             x++;
         }
         canvas.drawBitmap(heroBmp, x, 10 * 2560 / getHeight(), null); // Draw heroBmp at (10, 10)
