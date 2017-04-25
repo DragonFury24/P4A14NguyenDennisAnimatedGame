@@ -22,7 +22,7 @@ public class LoopThread extends Thread {
 
         long tickPS = 1000/FPS; //Number of seconds to complete each loop
         long startTime = System.currentTimeMillis(); //Current system time in milliseconds
-        long sleepTime; 
+        long sleepTime;
 
         while(running){ //Loop as long as running is true
             Canvas c = null; //Declares space for Canvas called c, local variable
@@ -36,6 +36,8 @@ public class LoopThread extends Thread {
                     view.getHolder().unlockCanvasAndPost(c);
                 }
             }
+
+            sleepTime = tickPS - (System.currentTimeMillis() - startTime);
         }
 
     }
