@@ -37,7 +37,11 @@ public class LoopThread extends Thread {
                 }
             }
 
-            sleepTime = tickPS - (System.currentTimeMillis() - startTime);
+            sleepTime = tickPS - (System.currentTimeMillis() - startTime); //Calculate the amount of time requird to use up tickPS
+            try {
+                if (sleepTime>0) sleep(sleepTime); //Pause to use up sleepTime
+                else sleep(10);
+            }catch (InterruptedException e) {}
         }
 
     }

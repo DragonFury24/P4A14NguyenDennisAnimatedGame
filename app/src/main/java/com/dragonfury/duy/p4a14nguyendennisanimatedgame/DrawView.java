@@ -17,6 +17,7 @@ public class DrawView extends SurfaceView {
     private SurfaceHolder holder; //Declares space for a SurfaceHolder called holder
     private LoopThread loopThread; //Declares space for a LoopThread called loopThread
     private int x = 0;
+    private int xSpeed = 5;
 
     public DrawView(Context context) { // Constructor because it has the same name as the class
         super(context); //Calls View(context), Parent's constructor
@@ -57,9 +58,12 @@ public class DrawView extends SurfaceView {
         super.onDraw(canvas);
 
         canvas.drawColor(Color.BLACK); //Draws black over the canvas
-        if (x < getWidth() - heroBmp.getWidth()) { //If x left of edge of screen minus width of bmp, increase 1
-            x++;
-        }
+        //if (x < getWidth() - heroBmp.getWidth()) x++; //If x left of edge of screen minus width of bmp, increase 1
+        if (x + heroBmp.getWidth() + xSpeed > getRight()) xSpeed*=-1;//If x and width of bmp passes right edge, invert xSpeed
+
+        if (x < getLeft()) xSpeed *=-1; //If x passes left edge, invert xSpeed
+
+        x+=xSpeed; //Increment x by xSpeed
         canvas.drawBitmap(heroBmp, x, 10 * 2560 / getHeight(), null); // Draw heroBmp at (10, 10)
     }
 }
