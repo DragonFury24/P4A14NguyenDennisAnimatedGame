@@ -17,7 +17,7 @@ public class Sprite extends RectF {
         iHeight = heroBMP.getHeight() / BMP_ROWS; //Calculate height of 1 icon
     }
     public static final Creator <RectF> CREATOR = null;
-    private int xSpeed = 5, ySpeed = 10; //Declare and instantiate
+    private int xSpeed = (int)(Math.random() * 51 - 25), ySpeed = (int)(Math.random() * 51 - 25); //Random intSpeed from -25 to 25
     Bitmap heroBMP; //Received bitmap stores instance heroBMP
     private static final int BMP_ROWS = 4; //Number of rows on sprite sheet
     private static int BMP_COLS = 4; //Number of columns on sprite sheet
