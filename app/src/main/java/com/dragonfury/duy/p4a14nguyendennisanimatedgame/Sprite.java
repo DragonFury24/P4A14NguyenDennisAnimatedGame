@@ -18,7 +18,11 @@ public class Sprite extends RectF {
     Bitmap heroBMP; //Received bitmap stores instance heroBMP
 
     public void update(Canvas c) {
-
+        if (right + xSpeed >= c.getWidth()) {xSpeed *=-1;} //Invert xSpeed and ySpeed when boundaries reached (bounce off walls)
+        else if (left + xSpeed <= 0) {xSpeed *= -1;}
+        if (bottom + ySpeed >= c.getHeight()) {ySpeed *= -1;}
+        else if (top + ySpeed <= 0) {ySpeed *= -1;}
+        offset(xSpeed, ySpeed); //Increment x and y directions
     }
 
     public void draw(Canvas c) {

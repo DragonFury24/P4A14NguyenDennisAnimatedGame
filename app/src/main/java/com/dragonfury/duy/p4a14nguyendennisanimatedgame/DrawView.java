@@ -16,15 +16,14 @@ public class DrawView extends SurfaceView {
     private Bitmap heroBmp; // Declare space for Bitmap called heroBmp, global scope
     private SurfaceHolder holder; //Declares space for a SurfaceHolder called holder
     private LoopThread loopThread; //Declares space for a LoopThread called loopThread
-    private int x = 0;
-    private int xSpeed = 5;
+    private Sprite sprite; //Creates space for character
 
     public DrawView(Context context) { // Constructor because it has the same name as the class
         super(context); //Calls View(context), Parent's constructor
 
         heroBmp = BitmapFactory.decodeResource(getResources(), R.drawable.bluejeans); //Instantiate heroBmp - assign to heroBmp for the first time
         holder = getHolder();
-        loopThread = new LoopThread(this); //Instantiate LoopThread with the current instanc eof DrawView
+        loopThread = new LoopThread(this); //Instantiate LoopThread with the current instance of DrawView
 
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
@@ -45,6 +44,7 @@ public class DrawView extends SurfaceView {
                 while (retry) {
                     try {
                         loopThread.join(); //Blocks the current thread until this instance's thread terminates
+                        retry=false;
                     } catch (InterruptedException e) {
 
                     }
@@ -58,12 +58,12 @@ public class DrawView extends SurfaceView {
         super.onDraw(canvas);
 
         canvas.drawColor(Color.BLACK); //Draws black over the canvas
-        //if (x < getWidth() - heroBmp.getWidth()) x++; //If x left of edge of screen minus width of bmp, increase 1
-        if (x + heroBmp.getWidth() + xSpeed > getRight()) xSpeed*=-1;//If x and width of bmp passes right edge, invert xSpeed
+        sprite.draw(canvas); //Modify and display sprite
+    }
 
-        if (x < getLeft()) xSpeed *=-1; //If x passes left edge, invert xSpeed
-
-        x+=xSpeed; //Increment x by xSpeed
-        canvas.drawBitmap(heroBmp, x, 10 * 2560 / getHeight(), null); // Draw heroBmp at (10, 10)
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        sprite = new Sprite(0, 0, (float).1 * getWidth(), (float).1 * getHeight(), heroBmp); //Creates character with initial values
     }
 }
