@@ -17,6 +17,7 @@ public class DrawView extends SurfaceView {
     private SurfaceHolder holder; //Declares space for a SurfaceHolder called holder
     private LoopThread loopThread; //Declares space for a LoopThread called loopThread
     private Sprite sprite; //Creates space for character
+    private Sprite sprite1;
 
     public DrawView(Context context) { // Constructor because it has the same name as the class
         super(context); //Calls View(context), Parent's constructor
