@@ -35,11 +35,21 @@ public class Sprite extends RectF {
 
     public void draw(Canvas c) {
         int srcX = currentFrame * iWidth; //Set x of current icon
-        int srcY = 1 * iHeight; //Set y to 2 rows of icons
+        int srcY = getAnimationRow() * iHeight; //Set y to row based on direction
         Rect src = new Rect(srcX, srcY, srcX + iWidth, srcY + iHeight); //Define rectangle to be drawn (1 icon)
 
         update(c); //Modify Sprite
         c.drawBitmap(heroBMP, src, this, null);
     }
 
+    public int getAnimationRow() {
+        if (Math.abs(xSpeed) > Math.abs(ySpeed)) { //If magnitude x is greater than magnitude y
+            if (Math.abs(xSpeed) == xSpeed) { //xSpeed is positive
+                return 2; //Return 2 - right
+            } else return 1; //Return 1 - left
+        } else if (Math.abs(ySpeed) > ySpeed) { //ySpeed is positive
+            return 0; //Return 0 - down
+        } else return 3; //Return 3 - up
+    }
 }
+

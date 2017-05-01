@@ -60,11 +60,13 @@ public class DrawView extends SurfaceView {
 
         canvas.drawColor(Color.BLACK); //Draws black over the canvas
         sprite.draw(canvas); //Modify and display sprite
+        sprite1.draw(canvas);
     }
 
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         sprite = new Sprite(0, 0, (float).1 * getWidth(), (float).1 * getHeight(), heroBmp); //Creates character with initial values
+        sprite1 = new Sprite(0, 0, (float).1 * getWidth(), (float).1 * getHeight(), heroBmp);
     }
 }
