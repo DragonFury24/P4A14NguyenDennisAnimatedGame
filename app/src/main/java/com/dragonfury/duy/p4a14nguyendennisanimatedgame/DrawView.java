@@ -8,6 +8,10 @@ import android.view.SurfaceHolder;
 import android.content.Context;
 import android.graphics.Bitmap;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 /**
  * Created by 1383504 on 4/19/2017.
  */
@@ -16,6 +20,7 @@ public class DrawView extends SurfaceView {
     private Bitmap heroBmp; // Declare space for Bitmap called heroBmp, global scope
     private SurfaceHolder holder; //Declares space for a SurfaceHolder called holder
     private LoopThread loopThread; //Declares space for a LoopThread called loopThread
+    private List<Sprite> sprites = new ArrayList<>(); //Creates a flexible data structure
 
     public DrawView(Context context) { // Constructor because it has the same name as the class
         super(context); //Calls View(context), Parent's constructor
@@ -58,6 +63,22 @@ public class DrawView extends SurfaceView {
 
         canvas.drawColor(Color.BLACK); //Draws black over the canvas
 
+    }
+
+    /**
+     * Create an individual Sprite
+     * @param image name if bitmap
+     * @return send Sprite back
+     */
+    private Sprite createSprite(int image) { //Create an individual Sprite and sends Sprite back
+        Bitmap heroBMP = BitmapFactory.decodeResource(getResources(), image);
+    }
+
+    /**
+     *
+     */
+    private void createSprites() { //Adds a new sprite to ArrayList of Sprites
+            sprites.add(createSprite(R.drawable.bluejeans));
     }
 }
 
