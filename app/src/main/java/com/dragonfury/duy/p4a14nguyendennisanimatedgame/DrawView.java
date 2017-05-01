@@ -32,6 +32,7 @@ public class DrawView extends SurfaceView {
         holder.addCallback(new SurfaceHolder.Callback() {
             @Override
             public void surfaceCreated(SurfaceHolder surfaceHolder) {
+                createSprites();
                 loopThread.setRunning(true); //Sets the thread's running variable to true
                 loopThread.start(); //Starts the thread
             }
@@ -62,6 +63,9 @@ public class DrawView extends SurfaceView {
         super.onDraw(canvas);
 
         canvas.drawColor(Color.BLACK); //Draws black over the canvas
+        for (Sprite sprite : sprites) {
+            sprite.draw(canvas);
+        }
 
     }
 
@@ -72,13 +76,19 @@ public class DrawView extends SurfaceView {
      */
     private Sprite createSprite(int image) { //Create an individual Sprite and sends Sprite back
         Bitmap heroBMP = BitmapFactory.decodeResource(getResources(), image);
+        Random randGen = new Random(System.currentTimeMillis());
+        int x = randGen.nextInt((int)(.9f * getWidth()));
+        int y = randGen.nextInt((int)(.9f * getHeight()));
+        return new Sprite(x, y, x + .1f * getWidth(), y + .1f * getHeight(), heroBMP);
     }
 
     /**
-     *
+     *Adds new Sprite to ArrayList of sprites
      */
     private void createSprites() { //Adds a new sprite to ArrayList of Sprites
-            sprites.add(createSprite(R.drawable.bluejeans));
+            for (int i = 0; i < 100; i++) {
+                sprites.add(createSprite(R.drawable.bluejeans));
+            }
     }
 }
 
