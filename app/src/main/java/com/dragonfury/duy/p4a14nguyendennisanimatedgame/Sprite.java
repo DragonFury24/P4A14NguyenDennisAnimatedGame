@@ -47,7 +47,7 @@ public class Sprite extends RectF {
             if (Math.abs(xSpeed) == xSpeed) { //xSpeed is positive
                 return 2; //Return 2 - right
             } else return 1; //Return 1 - left
-        } else if (Math.abs(ySpeed) > ySpeed) { //ySpeed is positive
+        } else if (Math.abs(ySpeed) == ySpeed) { //ySpeed is positive
             return 0; //Return 0 - down
         } else return 3; //Return 3 - up
     }

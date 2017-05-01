@@ -16,8 +16,6 @@ public class DrawView extends SurfaceView {
     private Bitmap heroBmp; // Declare space for Bitmap called heroBmp, global scope
     private SurfaceHolder holder; //Declares space for a SurfaceHolder called holder
     private LoopThread loopThread; //Declares space for a LoopThread called loopThread
-    private Sprite sprite; //Creates space for character
-    private Sprite sprite1;
 
     public DrawView(Context context) { // Constructor because it has the same name as the class
         super(context); //Calls View(context), Parent's constructor
@@ -45,7 +43,7 @@ public class DrawView extends SurfaceView {
                 while (retry) {
                     try {
                         loopThread.join(); //Blocks the current thread until this instance's thread terminates
-                        retry=false;
+                        retry = false;
                     } catch (InterruptedException e) {
 
                     }
@@ -59,14 +57,7 @@ public class DrawView extends SurfaceView {
         super.onDraw(canvas);
 
         canvas.drawColor(Color.BLACK); //Draws black over the canvas
-        sprite.draw(canvas); //Modify and display sprite
-        sprite1.draw(canvas);
-    }
 
-    @Override
-    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
-        super.onLayout(changed, left, top, right, bottom);
-        sprite = new Sprite(0, 0, (float).1 * getWidth(), (float).1 * getHeight(), heroBmp); //Creates character with initial values
-        sprite1 = new Sprite(0, 0, (float).1 * getWidth(), (float).1 * getHeight(), heroBmp);
     }
 }
+
