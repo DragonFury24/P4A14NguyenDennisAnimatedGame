@@ -10,8 +10,14 @@ import android.graphics.RectF;
  */
 public class Sprite extends RectF {
 
-    public Sprite (float left, float top, float right, float bottom, Bitmap heroBMP) {
-        super(left, top, right, bottom);
+    /**
+     *
+     * @param canvasWidth
+     * @param canvasHeight
+     * @param heroBMP
+     */
+    public Sprite (float canvasWidth, float canvasHeight, Bitmap heroBMP) {
+        super(0, 0, .1f * canvasWidth, .1f * canvasHeight);
         this.heroBMP = heroBMP;
         iWidth = heroBMP.getWidth() / BMP_COLS; //Calculate width of 1 icon
         iHeight = heroBMP.getHeight() / BMP_ROWS; //Calculate height of 1 icon
