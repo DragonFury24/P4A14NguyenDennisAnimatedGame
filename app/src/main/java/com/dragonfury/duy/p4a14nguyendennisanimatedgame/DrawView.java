@@ -3,6 +3,7 @@ package com.dragonfury.duy.p4a14nguyendennisanimatedgame;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 import android.content.Context;
@@ -21,6 +22,7 @@ public class DrawView extends SurfaceView {
     private SurfaceHolder holder; //Declares space for a SurfaceHolder called holder
     private LoopThread loopThread; //Declares space for a LoopThread called loopThread
     private List<Sprite> sprites = new ArrayList<>(); //Creates a flexible data structure
+    private long lastClick;
 
     public DrawView(Context context) { // Constructor because it has the same name as the class
         super(context); //Calls View(context), Parent's constructor
@@ -86,6 +88,24 @@ public class DrawView extends SurfaceView {
             for (int i = 0; i < 100; i++) {
                 sprites.add(createSprite(R.drawable.bluejeans));
             }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (System.currentTimeMillis() - lastClick > 500) { //Half second between valid clicks
+            lastClick = System.currentTimeMillis(); //Records time of effective click
+            synchronized (getHolder()) {
+                for (int i = sprites.size()-1; i >= 0; i--) {
+                    Sprite sprite = sprites.get(i);
+                    if (sprite.contains(event.getX(), event.getY())) {
+                        sprites.remove(sprite);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return super.onTouchEvent(event);
     }
 }
 
