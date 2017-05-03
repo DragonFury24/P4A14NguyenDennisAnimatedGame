@@ -17,12 +17,13 @@ public class Sprite extends RectF {
         iHeight = heroBMP.getHeight() / BMP_ROWS; //Calculate height of 1 icon
     }
     public static final Creator <RectF> CREATOR = null;
-    private int xSpeed = (int)(Math.random() * 51 - 25), ySpeed = (int)(Math.random() * 51 - 25); //Random intSpeed from -25 to 25
     Bitmap heroBMP; //Received bitmap stores instance heroBMP
     private static final int BMP_ROWS = 4; //Number of rows on sprite sheet
-    private static int BMP_COLS = 4; //Number of columns on sprite sheet
+    private static final int BMP_COLS = 4; //Number of columns on sprite sheet
+    private static final int MAX_SPEED = 20;
     private int currentFrame = 0; //Frame to be drawn
     private int iWidth, iHeight; //Dimensions of 1 icon on sprite sheet
+    private int xSpeed = (int)(Math.random() * (MAX_SPEED * 2 + 1) - MAX_SPEED), ySpeed = (int)(Math.random() * (MAX_SPEED * 2 - 1) - MAX_SPEED); //Random intSpeed from -25 to 25
 
     public void update(Canvas c) {
         if (right + xSpeed >= c.getWidth()) {xSpeed *=-1;} //Invert xSpeed and ySpeed when boundaries reached (bounce off walls)
