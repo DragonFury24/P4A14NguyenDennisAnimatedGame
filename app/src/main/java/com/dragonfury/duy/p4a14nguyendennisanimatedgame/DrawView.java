@@ -1,5 +1,6 @@
 package com.dragonfury.duy.p4a14nguyendennisanimatedgame;
 
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -22,6 +23,7 @@ public class DrawView extends SurfaceView {
     private SurfaceHolder holder; //Declares space for a SurfaceHolder called holder
     private LoopThread loopThread; //Declares space for a LoopThread called loopThread
     private List<Sprite> sprites = new ArrayList<>(); //Creates a flexible data structure
+    private List<TempSprite> temps = new ArrayList<>();
     private long lastClick;
 
     public DrawView(Context context) { // Constructor because it has the same name as the class
@@ -65,6 +67,9 @@ public class DrawView extends SurfaceView {
         super.onDraw(canvas);
 
         canvas.drawColor(Color.BLACK); //Draws black over the canvas
+        for (int i = temps.size() - 1; i >= 0; i--) {
+            temps.get(i).draw(canvas);
+        }
         for (Sprite sprite : sprites) {
             sprite.draw(canvas);
         }
@@ -98,6 +103,7 @@ public class DrawView extends SurfaceView {
                 for (int i = sprites.size()-1; i >= 0; i--) {
                     Sprite sprite = sprites.get(i);
                     if (sprite.contains(event.getX(), event.getY())) {
+                        temps.add(new TempSprite(sprite, temps, getResources()));
                         sprites.remove(sprite);
                         break;
                     }
