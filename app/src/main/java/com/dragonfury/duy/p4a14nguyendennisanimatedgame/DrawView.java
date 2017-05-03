@@ -76,10 +76,7 @@ public class DrawView extends SurfaceView {
      */
     private Sprite createSprite(int image) { //Create an individual Sprite and sends Sprite back
         Bitmap heroBMP = BitmapFactory.decodeResource(getResources(), image);
-        Random randGen = new Random(System.currentTimeMillis());
-        int x = randGen.nextInt((int)(.9f * getWidth()));
-        int y = randGen.nextInt((int)(.9f * getHeight()));
-        return new Sprite(x, y, x + .1f * getWidth(), y + .1f * getHeight(), heroBMP);
+        return new Sprite(getWidth(), getHeight(), heroBMP);
     }
 
     /**
